@@ -10,7 +10,7 @@ class patrimonio(QWidget):
         # Setandos valores de posição x e y, além de largura e altura 
         self.setGeometry(10,30,400,300)
 
-        self.setWindowTitle("Cadastro do patrimônio")
+        self.setWindowTitle("Cadastro todos os equipamentos do patrimônio")
 
         # Gerenciador de layout vertical 
         self.layout_v = QVBoxLayout()
@@ -20,7 +20,7 @@ class patrimonio(QWidget):
         self.label_id.setStyleSheet("QLabel{font-size:12pt}")
 
         self.edit_id = QLineEdit()
-        self.edit_id.setStyleSheet("QLineEdit{font-size:14pt}")
+        self.edit_id.setStyleSheet("QLineEdit{font-size:12pt}")
 
          # números de série
         self.label_numeros = QLabel("Números de Séries: ")
@@ -73,7 +73,7 @@ class patrimonio(QWidget):
         self.edit_aquisicao.setStyleSheet("QLineEdit{font-size:12pt}")
 
         self.button = QPushButton("Cadastrar")
-        self.button.setStyleSheet("QPushButton{background-color:blue;color:white;font-size:12pt;font-weight:bold}")
+        self.button.setStyleSheet("QPushButton{background-color:red;color:white;font-size:12pt;font-weight:bold}")
 
         # chamar a função de cadastro do 
         # cliente ao clicar no botão
@@ -124,7 +124,7 @@ class patrimonio(QWidget):
         arquivo.write("--------------------------------------------------------------\n")
         arquivo.close
 
-app = QApplication(sys.argv)
-tela = patrimonio()
-tela.show()
-app.exec()
+#app = QApplication(sys.argv)
+#tela = patrimonio()
+#tela.show()
+#app.exec()
