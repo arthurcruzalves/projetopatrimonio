@@ -1,7 +1,8 @@
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QMessageBox
 import sys
+import csv
 
-class patrimonio(QWidget):
+class LocalizarPatrimonio(QWidget):
     def __init__(self):
         super().__init__()
 
@@ -72,16 +73,14 @@ class patrimonio(QWidget):
         self.edit_aquisicao = QLineEdit()
         self.edit_aquisicao.setStyleSheet("QLineEdit{font-size:12pt}")
 
-        self.button = QPushButton("Cadastrar")
-        self.button.setStyleSheet("QPushButton{background-color:red;color:white;font-size:12pt;font-weight:bold}")
-
-        # chamar a função de cadastro do 
-        # cliente ao clicar no botão
-        self.button.clicked.connect(self.cadastrar)
+    
 
         # Adicionar a label nome e o lineedit ao layout vertical
         self.layout_v.addWidget(self.label_id)
         self.layout_v.addWidget(self.edit_id)
+        self.btnbuscar = QPushButton("Buscar Patrimônio")
+        self.layout_v.addWidget(self.btnbuscar)
+        self.btnbuscar.clicked.connect(self.localizar)
 
         self.layout_v.addWidget(self.label_numeros)
         self.layout_v.addWidget(self.edit_numeros)
@@ -104,35 +103,33 @@ class patrimonio(QWidget):
         self.layout_v.addWidget(self.label_aquisicao)
         self.layout_v.addWidget(self.edit_aquisicao)
 
-        self.layout_v.addWidget(self.button)
-
-
-        # Adicionar o layout_v a tela 
         self.setLayout(self.layout_v)
 
+    def localizar(self):
 
-    def cadastrar(self):
-        if(self.edit_id.text()=="" or 
-           self.edit_numeros.text()=="" or 
-           self.edit_nome.text()=="" or 
-           self.edit_tipo.text()=="" or 
-           self.edit_descricao.text()=="" or 
-           self.edit_fabricacao.text()=="" or 
-           self.edit_aquisicao.text()==""):
-            QMessageBox.critical(self,"Erro","Você deve preencher todos os campos")
+        # abrir o arquivo csv e atribuir a uma variável
+        arquivo = open("inventario.csv","r",encoding="utf8") 
+        linhas = csv.reader(arquivo)
 
-        else:
-            arquivo = open("inventario.csv","+a", encoding="utf8")
-            arquivo.write(f"{self.edit_id.text()};")
-            arquivo.write(f"{self.edit_numeros.text()};")
-            arquivo.write(f"{self.edit_nome.text()};")
-            arquivo.write(f"{self.edit_tipo.text()};")
-            arquivo.write(f"{self.edit_descricao.text()};")
-            arquivo.write(f"{self.edit_localizacao.text()};")
-            arquivo.write(f"{self.edit_fabricacao.text()};")
-            arquivo.write(f"{self.edit_aquisicao.text()}\n")
-            arquivo.close
-            QMessageBox.information(self,"Salvo","O dados patrimômio foram salvos")
+        for i in linhas:
+            lin = str(i).replace("['","").replace("']", "").split(";")
+            if(lin[0]==self.edit_id.text()):
+                self.edit_numeros.setText(lin[1])
+                self.edit_nome.setText(lin[2])
+                self.edit_tipo.setText(lin[3])
+                self.edit_descricao.setText(lin[4])
+                self.edit_localizacao.setText(lin[5])
+                self.edit_fabricacao.setText(lin[6])
+                self.edit_aquisicao.setText(lin[7])
+
+
+
+
+
+
+
+
+     
 
 #app = QApplication(sys.argv)
 #tela = patrimonio()

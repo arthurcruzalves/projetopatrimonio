@@ -1,9 +1,0 @@
-ID do Objeto: 67832573
-Números de Séries: 7632845873
-Nome do Patrimônio: mesa'
-Tipo do Objeto: sla
-Descrição do Objeto: sla
-Localização do Produto: japao
-Data de Fabricação: 12/08/2024
-Data de Aquisição: 08/02/2025
---------------------------------------------------------------
